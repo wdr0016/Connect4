@@ -8,7 +8,7 @@ import Game.GameClass as GameClass
 
 
 class Test(unittest.TestCase):
-        
+
     def test100_010_Vertical(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-           
+
     def test200_010_Vertical(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -34,7 +34,7 @@ class Test(unittest.TestCase):
         expectedResult = False
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_010_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -47,7 +47,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_020_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -60,7 +60,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_030_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -73,7 +73,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_040_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -86,7 +86,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-           
+
     def test200_010_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -99,7 +99,7 @@ class Test(unittest.TestCase):
         expectedResult = False
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-           
+
     def test200_020_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -112,7 +112,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test200_030_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -125,7 +125,7 @@ class Test(unittest.TestCase):
         expectedResult = False
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test200_040_Horizontal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -138,7 +138,7 @@ class Test(unittest.TestCase):
         expectedResult = False
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-    
+
     def test100_010_Diagonal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -151,7 +151,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_020_Diagonal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,1,0,0, \
@@ -164,7 +164,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test100_030_Diagonal(self):
         board = [0,0,0,0,0,1,0, \
                  0,0,0,0,1,0,0, \
@@ -177,7 +177,7 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-           
+
     def test200_010_Diagonal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -190,7 +190,7 @@ class Test(unittest.TestCase):
         expectedResult = False
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-        
+
     def test300_010_Diagonal(self):
         board = [0,0,0,0,0,0,0, \
                  0,0,0,0,0,0,0, \
@@ -203,4 +203,16 @@ class Test(unittest.TestCase):
         expectedResult = True
         actualResult = GameClass.WillItWin(board, turnNum, x)
         self.assertEqual(expectedResult, actualResult)
-    
+
+    def test999_999_DiagonalFail(self):
+        board = [0, 2, 0, 0, 0, 0, 0, \
+                 2, 1, 0, 0, 0, 0, 0, \
+                 2, 2, 0, 0, 0, 0, 0, \
+                 1, 1, 0, 0, 0, 0, 0, \
+                 1, 1, 1, 0, 0, 0, 0, \
+                 1, 1, 2, 2, 0, 0, 2]
+        turnNum = 2
+        x = 2
+        expectedResult = False
+        actualResult = GameClass.WillItWin(board, turnNum, x)
+        self.assertEqual(expectedResult, actualResult)
