@@ -1,4 +1,4 @@
-from baseline import pickCol
+from baseline import pickColBaseline
 from AIConnect4.Game.GameClass import *
 
 BOARD_LENGTH = 7
@@ -25,8 +25,8 @@ def printBoard(state):
         print(line)
 
 board = [0 for _ in range(42)]
-
-while True:
+count = 0
+while count < 42:
     printBoard(board)
     print("Choose a column: ")
     col = int(input())
@@ -40,7 +40,7 @@ while True:
     board = ColumnDrop(board, turn, col)
 
     turn = 2
-    col = pickCol(board, turn)
+    col = pickColBaseline(board, turn)
     if WillItWin(board, turn, col):
         print(board)
         board = ColumnDrop(board, turn, col)
@@ -48,3 +48,8 @@ while True:
         print("YOU LOST")
         break
     board = ColumnDrop(board, turn, col)
+    count += 2
+
+if count == 42:
+    printBoard(board)
+    print("TIE")
