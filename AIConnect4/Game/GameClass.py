@@ -9,19 +9,22 @@ BOARD_LENGTH = 7
 
 
 # board = the current board -> array of length 42
-# turnNum = turn number -> int 
+# turnNum = turn number -> int
 # x = column -> int
 def ColumnDrop(board, turnNum, x):
+    boardCopy = board[:]
     for i in range(BOARD_HEIGHT - 1, -1 , -1):
         square = (BOARD_LENGTH * i) + x
-        if board[square] == 0:
-            board[square] = turnNum
-    return board
+        if boardCopy[square] == 0:
+            boardCopy[square] = turnNum
+            break
+    return boardCopy
 
 # board = the current board -> array of length 42
-# turnNum = turn number -> int 
+# turnNum = turn number -> int
 # x = column -> int
-def WillItWin(board, turnNum, x):
+def WillItWin(boardOG, turnNum, x):
+    board = boardOG[:]
     for i in range(BOARD_HEIGHT - 1, -1 , -1):
         square = (BOARD_LENGTH * i) + x
         if board[square] == 0:
