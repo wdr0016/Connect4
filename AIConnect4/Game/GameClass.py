@@ -70,7 +70,7 @@ def WillItWin(boardOG, turnNum, x):
     rowNum = square // BOARD_LENGTH
     colNum = x
     if square not in diagDQ:
-        while rowNum < 5 and colNum > 6:
+        while rowNum < 5 and colNum < 6:
             rowNum += 1
             colNum += 1
         possible = True
@@ -80,9 +80,9 @@ def WillItWin(boardOG, turnNum, x):
                 board[(rowNum * BOARD_LENGTH) + colNum] == board[((rowNum - 3) * BOARD_LENGTH) + colNum - 3] and \
                 board[(rowNum * BOARD_LENGTH) + colNum] == turnNum:
                 return True
-            elif rowNum - 4 >= 0 and colNum + 4 < 7:
+            elif rowNum - 4 >= 0 and colNum - 4 >= 0:
                 rowNum -= 1
-                colNum += 1
+                colNum -= 1
             else:
                 possible = False
     return False
