@@ -1,5 +1,5 @@
-from baseline import pickColBaseline
 from minimax import pickColMinimax
+from pickRandom import pickColRandom
 from AIConnect4.Game.GameClass import *
 
 player1Wins = 0
@@ -10,18 +10,15 @@ for i in range(1000):
     count = 0
     while count < 42:
         turn = 1
-        col = pickColBaseline(board, turn)
+        col = pickColMinimax(board, turn)
         if WillItWin(board, turn, col):
-            #print(board)
             board = ColumnDrop(board, turn, col)
-            #print(board)
-            #print()
             player1Wins += 1
             break
         board = ColumnDrop(board, turn, col)
 
         turn = 2
-        col = pickColMinimax(board, turn)
+        col = pickColRandom(board, turn)
         if WillItWin(board, turn, col):
             board = ColumnDrop(board, turn, col)
             player2Wins += 1
@@ -31,8 +28,8 @@ for i in range(1000):
     if count == 42:
         tieCount += 1
 
-print(f"Baseline Player 1 Wins: {player1Wins}")
-print(f"Minimax Player 2 Wins: {player2Wins}")
+print(f"Minimax Player 1 Wins: {player1Wins}")
+print(f"Random Player 2 Wins: {player2Wins}")
 print(f"Ties: {tieCount}")
 print()
 
@@ -44,7 +41,7 @@ for i in range(1000):
     count = 0
     while count < 42:
         turn = 1
-        col = pickColMinimax(board, turn)
+        col = pickColRandom(board, turn)
         if WillItWin(board, turn, col):
             board = ColumnDrop(board, turn, col)
             player1Wins += 1
@@ -52,12 +49,9 @@ for i in range(1000):
         board = ColumnDrop(board, turn, col)
 
         turn = 2
-        col = pickColBaseline(board, turn)
+        col = pickColMinimax(board, turn)
         if WillItWin(board, turn, col):
-            #print(board)
             board = ColumnDrop(board, turn, col)
-            #print(board)
-            #print()
             player2Wins += 1
             break
         board = ColumnDrop(board, turn, col)
@@ -65,6 +59,6 @@ for i in range(1000):
     if count == 42:
         tieCount += 1
 
-print(f"Minimax Player 1 Wins: {player1Wins}")
-print(f"Baseline Player 2 Wins: {player2Wins}")
+print(f"Random Player 1 Wins: {player1Wins}")
+print(f"Minimax Player 2 Wins: {player2Wins}")
 print(f"Ties: {tieCount}")

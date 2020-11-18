@@ -32,10 +32,9 @@ turn: The number 1 or 2 dictating which it is picking for.
 depth: The current depth of
 """
 def pickColMinimax(board, turn):
-    depth = getDepth(board)
+    depth = getDepth(board, 2)
 
     bestMove, score = minimax(board, turn, depth, True, False)
-    print(score)
     return bestMove
 
 def minimax(board, turn, depth, maximizingPlayer, thisWon, col=-1):
@@ -87,14 +86,14 @@ def getPossibleMoves(board):
             possibleMoves.append(i)
     return possibleMoves
 
-def getDepth(board):
+def getDepth(board, maxDepth):
     zeroCount = 0
     depth = 1
     for i in board:
         if i == 0:
             zeroCount += 1
-            if zeroCount > 3:
-                depth = 4
+            if zeroCount > (maxDepth-1):
+                depth = maxDepth
                 break
             else:
                 depth = zeroCount
