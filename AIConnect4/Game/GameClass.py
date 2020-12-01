@@ -86,3 +86,75 @@ def WillItWin(boardOG, turnNum, x):
             else:
                 possible = False
     return False
+
+def threeMan(boardOG, turnNum, x):
+    board = boardOG[:]
+    for i in range(BOARD_HEIGHT - 1, -1 , -1):
+        square = (BOARD_LENGTH * i) + x
+        if board[square] == 0:
+            board[square] = turnNum
+            break
+    rowNum = square // BOARD_LENGTH
+    # Test vertical
+    touching = 1
+    if square < 28:
+        for i in range(rowNum + 1, rowNum + 3, 1):
+            if board[(i * BOARD_LENGTH) + x] == turnNum:
+                touching += 1
+    if touching == 3:
+        return True
+    # Test horizontal
+    if x != 5 and x != 6 and board[square] == board[square + 1] and board[square] == board[square + 2]:
+        return True
+    elif x != 0 and x != 1 and board[square] == board[square - 1] and board[square] == board[square - 2]:
+        return True
+    elif x != 0 and x != 6 and board[square] == board[square - 1] and board[square] == board[square + 1]:
+        return True
+    # Test 1 diagonal
+    if x != 5 and x != 6 and rowNum > 1 and board[square] == board[square - 6] and board[square] == board[square - 12]:
+        return True
+    elif x != 0 and x != 6 and rowNum > 0 and rowNum < 5 and board[square] == board[square - 6] and board[square] == board[square + 6]:
+        return True
+    elif x != 0 and x != 1 and rowNum < 4 and board[square] == board[square + 6] and board[square] == board[square + 12] and x != 0 and x != 1 and rowNum < 4:
+        return True 
+    # Test -1 diagonal
+    if x != 0 and x != 1 and rowNum > 1 and board[square] == board[square - 8] and board[square] == board[square - 16]:
+        return True
+    elif x != 0 and x != 6 and rowNum > 0 and rowNum < 5 and board[square] == board[square - 8] and board[square] == board[square + 8]:
+        return True
+    elif x != 5 and x != 6 and rowNum < 4 and board[square] == board[square + 8] and board[square] == board[square + 16]:
+        return True
+    return False
+
+def twoMan(boardOG, turnNum, x):
+    board = boardOG[:]
+    for i in range(BOARD_HEIGHT - 1, -1 , -1):
+        square = (BOARD_LENGTH * i) + x
+        if board[square] == 0:
+            board[square] = turnNum
+            break
+    rowNum = square // BOARD_LENGTH
+    # Test vertical
+    touching = 1
+    if square < 35:
+        for i in range(rowNum + 1, rowNum + 2, 1):
+            if board[(i * BOARD_LENGTH) + x] == turnNum:
+                touching += 1
+    if touching == 2:
+        return True
+    # Test horizontal
+    if x != 6 and board[square] == board[square + 1]:
+        return True
+    elif x != 0 and board[square] == board[square - 1]:
+        return True
+    # Test 1 diagonal
+    if x != 6 and rowNum > 0 and board[square] == board[square - 6]:
+        return True
+    elif x != 0 and rowNum < 5 and board[square] == board[square + 6]:
+        return True 
+    # Test -1 diagonal
+    if x != 0 and rowNum > 0 and board[square] == board[square - 8]:
+        return True
+    elif x != 6 and rowNum < 5 and board[square] == board[square + 8]:
+        return True
+    return False

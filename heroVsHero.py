@@ -1,4 +1,4 @@
-from minimax import pickColMinimax
+from heuristic import pickColHero
 from AIConnect4.Game.GameClass import *
 
 player1Wins = 0
@@ -9,7 +9,7 @@ for i in range(1000):
     count = 0
     while count < 42:
         turn = 1
-        col = pickColMinimax(board, turn)
+        col = pickColHero(board, turn)
         if WillItWin(board, turn, col):
             board = ColumnDrop(board, turn, col)
             player1Wins += 1
@@ -17,7 +17,7 @@ for i in range(1000):
         board = ColumnDrop(board, turn, col)
 
         turn = 2
-        col = pickColMinimax(board, turn)
+        col = pickColHero(board, turn)
         if WillItWin(board, turn, col):
             board = ColumnDrop(board, turn, col)
             player2Wins += 1
@@ -27,6 +27,7 @@ for i in range(1000):
     if count == 42:
         tieCount += 1
 
-print(f"Minimax Player 1 Wins: {player1Wins}")
-print(f"Minimax Player 2 Wins: {player2Wins}")
+print(f"Hero Player 1 Wins: {player1Wins}")
+print(f"Hero Player 2 Wins: {player2Wins}")
 print(f"Ties: {tieCount}")
+print()

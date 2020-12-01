@@ -25,23 +25,21 @@ def printBoard(state):
         print(line)
 
 """
-Implements a minimax algorithm.
+Implements a minimax with heuristic algorithm.
 
 board: The connect4 board's current state.
 turn: The number 1 or 2 dictating which it is picking for.
 depth: The current depth of
 """
-def pickColMinimax(board, turn):
+def pickColHero(board, turn):
     depth = getDepth(board, 2)
 
-    bestMove, score = minimax(board, turn, depth, True, False)
+    bestMove, score = hero(board, turn, depth, True, False, 0)
     return bestMove
 
-def minimax(board, turn, depth, maximizingPlayer, thisWon, col=-1):
-    if thisWon:
-        return None, 100 + (depth+1)
-    if depth == 0:
-        return None, boardScore(board, col)
+def hero(board, turn, depth, maximizingPlayer, thisWon, bScore, col=-1):
+    if depth == 0 or thisWon:
+        return None, bScore
 
     newPossibleMoves = getPossibleMoves(board)
     if turn == 1:
@@ -53,11 +51,25 @@ def minimax(board, turn, depth, maximizingPlayer, thisWon, col=-1):
     if maximizingPlayer:
         value = -9e999
         for newCol in newPossibleMoves:
+            turnScore = bScore
             newBoard = ColumnDrop(board, turn, newCol)
             willItWin = WillItWin(board, turn, newCol)
-            nextMove, nextScore = minimax(newBoard, newTurn, depth-1, False, willItWin, newCol)
-            if depth == 2:
-                #print(f"{newCol}: {nextScore}")
+            if willItWin:
+                turnScore += 1000000000000 + depth
+            elif WillItWin(board, newTurn, newCol):
+                turnScore -= 10000000000
+            elif threeMan(board, turn, newCol):
+                turnScore += 1000000
+            elif threeMan(board, newTurn, newCol):
+                turnScore -= 1000
+            elif twoMan(board, turn, newCol):
+                turnScore += 100
+            elif twoMan(board, newTurn, newCol):
+                turnScore -= 10
+            else:
+                turnScore += 1
+            nextMove, nextScore = hero(newBoard, newTurn, depth-1, False, willItWin, turnScore, newCol)
+            if depth == 5:
                 pass
             if nextScore > value:
                 value = nextScore
@@ -65,9 +77,24 @@ def minimax(board, turn, depth, maximizingPlayer, thisWon, col=-1):
     else:
         value = 9e999
         for newCol in newPossibleMoves:
+            turnScore = bScore
             newBoard = ColumnDrop(board, turn, newCol)
             willItWin = WillItWin(board, turn, newCol)
-            nextMove, nextScore = minimax(newBoard, newTurn, depth-1, True, willItWin, newCol)
+            if willItWin:
+                turnScore += 1000000000000 + depth
+            elif WillItWin(board, newTurn, newCol):
+                turnScore -= 10000000000
+            elif threeMan(board, turn, newCol):
+                turnScore += 1000000
+            elif threeMan(board, newTurn, newCol):
+                turnScore -= 1000
+            elif twoMan(board, turn, newCol):
+                turnScore += 100
+            elif twoMan(board, newTurn, newCol):
+                turnScore -= 10
+            else:
+                turnScore += 1
+            nextMove, nextScore = hero(newBoard, newTurn, depth-1, True, willItWin, turnScore, newCol)
             nextScore *= -1
             if nextScore < value:
                 value = nextScore
